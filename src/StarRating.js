@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 
 const containerStyle = {
@@ -111,6 +111,8 @@ export default function StarRating({
     const [rating, setRating] = useState(defaultRating)
     const [tempRating, setTempRating] = useState(0)
 
+    useEffect(() => console.log(tempRating), [tempRating])
+
     const textStyle = {
         lineHeight: "1",
         margin: "0",
@@ -124,7 +126,7 @@ export default function StarRating({
             Array.from({length: maxRating}, (_, i) => 
                 <Star 
                 key={i} 
-                onRate={() => setRating(i+1) && setMovieRating(i+1)} 
+                onRate={() => {setRating(i+1); setMovieRating(i+1)}} 
                 isEmpty={tempRating ? (i+1) > tempRating : (i+1) > rating}
                 onHover={() => setTempRating(i+1)}
                 onLeave={() => setTempRating(0)}
@@ -133,9 +135,12 @@ export default function StarRating({
             )
         }
         </div>
-        <p style={textStyle}>{
-        message.length === maxRating ? 
-        message[tempRating ? tempRating - 1 : rating - 1] : 
-        rating || ""}</p>
+        <p style={textStyle}>
+            {
+                message.length === maxRating ? 
+                message[tempRating ? tempRating - 1 : rating - 1] : 
+                tempRating ? tempRating : rating || "❓"
+            }
+        </p>
     </div>
 }
