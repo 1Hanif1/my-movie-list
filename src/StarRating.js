@@ -111,8 +111,6 @@ export default function StarRating({
     const [rating, setRating] = useState(defaultRating)
     const [tempRating, setTempRating] = useState(0)
 
-    useEffect(() => console.log(tempRating), [tempRating])
-
     const textStyle = {
         lineHeight: "1",
         margin: "0",
