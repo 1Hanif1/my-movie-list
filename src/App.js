@@ -86,7 +86,7 @@ function SelectedMovie({movieId, deselectMovie, addToWatchedList, watchedList = 
   useEffect(() => {
     document.addEventListener('keydown', (e) => e.code === "Escape"? deselectMovie() : null)
 
-    return () => document.removeEventListener('keydown')
+    return () => document.removeEventListener('keydown', null)
   }, [deselectMovie])
   
   const handleAddToList = function() {
